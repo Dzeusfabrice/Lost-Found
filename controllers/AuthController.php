@@ -15,8 +15,7 @@ class AuthController
 
     public function home(): void
     {
-        // Redirige vers la liste des annonces par défaut
-        redirect('ads');
+        require VIEWS_PATH . '/home.php';
     }
 
     public function login(): void
