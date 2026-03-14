@@ -8,8 +8,8 @@
 
 // --- Constantes globales ---
 define('ROOT_PATH',    dirname(__DIR__));
-define('VIEWS_PATH',   ROOT_PATH . '/views');
-define('UPLOADS_PATH', ROOT_PATH . '/uploads');
+define('VIEWS_PATH',   dirname(ROOT_PATH) . '/frontend/views');
+define('UPLOADS_PATH', dirname(ROOT_PATH) . '/uploads');
 define('UPLOADS_URL',  '/lostfound/uploads');
 define('APP_NAME',     'Lost & Found');
 define('BASE_URL',     '/lostfound');

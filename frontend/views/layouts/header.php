@@ -25,7 +25,7 @@ if ($isLoggedIn) {
     <meta name="description" content="Application de gestion d'objets perdus et trouvés. Publiez des annonces et retrouvez vos affaires.">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/public/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/public/css/style.css">
     
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

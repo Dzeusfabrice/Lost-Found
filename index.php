@@ -6,7 +6,7 @@
  */
 
 // Chargement du système (config, autoload, session, helpers)
-require_once __DIR__ . '/config/bootstrap.php';
+require_once __DIR__ . '/backend/config/bootstrap.php';
 
 // Récupération de l'action depuis l'URL (ex: index.php?action=login)
 $action = $_GET['action'] ?? 'home';

@@ -21,26 +21,26 @@ Ce document définit précisément les modules, les fichiers et les responsabili
 *Règle d'or : Utiliser `e($var)` pour tout affichage et ne JAMAIS faire de SQL dans la vue.*
 
 #### **P1 (Tatou) — Messagerie & Admin**
-- `views/messages/list.php`
-- `views/messages/view.php`
-- `views/admin/dashboard.php`
-- `views/admin/users.php`
-- `views/admin/ads.php`
-- `views/errors/404.php` & `403.php`
+- `frontend/views/messages/list.php`
+- `frontend/views/messages/view.php`
+- `frontend/views/admin/dashboard.php`
+- `frontend/views/admin/users.php`
+- `frontend/views/admin/ads.php`
+- `frontend/views/errors/404.php` & `403.php`
 
 #### **P2 (Pink baby) — Annonces & Recherche**
-- `views/ads/list.php`
-- `views/ads/view.php`
-- `views/ads/create.php`
-- `views/ads/edit.php`
-- `views/search/results.php`
+- `frontend/views/ads/list.php`
+- `frontend/views/ads/view.php`
+- `frontend/views/ads/create.php`
+- `frontend/views/ads/edit.php`
+- `frontend/views/search/results.php`
 
 #### **P3 (Hilary) — Auth & Profil**
-- `views/layouts/header.php` & `footer.php`
-- `views/auth/login.php`
-- `views/auth/register.php`
-- `views/profile/index.php`
-- `views/profile/edit.php`
+- `frontend/views/layouts/header.php` & `footer.php`
+- `frontend/views/auth/login.php`
+- `frontend/views/auth/register.php`
+- `frontend/views/profile/index.php`
+- `frontend/views/profile/edit.php`
 
 ---
 
@@ -48,24 +48,24 @@ Ce document définit précisément les modules, les fichiers et les responsabili
 *Règle d'or : Respecter les seuils de Complexité Cyclomatique (CC <= 10).*
 
 #### **P4 (Noumi) — Sécurité & Auth**
-- `controllers/AuthController.php`
-- `models/UserModel.php`
-- `includes/auth.php`
-- `includes/csrf.php`
+- `backend/controllers/AuthController.php`
+- `backend/models/UserModel.php`
+- `backend/includes/auth.php`
+- `backend/includes/csrf.php`
 
 #### **P5 (Etaba) — Annonces & Recherche**
-- `controllers/AdController.php`
-- `controllers/SearchController.php`
-- `models/AdModel.php`
-- `services/UploadService.php`
+- `backend/controllers/AdController.php`
+- `backend/controllers/SearchController.php`
+- `backend/models/AdModel.php`
+- `backend/services/UploadService.php`
 
 #### **P6 (Noumi) — Messagerie & BDD**
-- `controllers/MessageController.php`
-- `models/ConversationModel.php`
-- `models/MessageModel.php`
-- `controllers/AdminController.php`
-- `config/bootstrap.php`
-- `core/Database.php`
+- `backend/controllers/MessageController.php`
+- `backend/models/ConversationModel.php`
+- `backend/models/MessageModel.php`
+- `backend/controllers/AdminController.php`
+- `backend/config/bootstrap.php`
+- `backend/core/Database.php`
 
 ---
 
