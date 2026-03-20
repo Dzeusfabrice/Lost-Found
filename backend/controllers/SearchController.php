@@ -39,6 +39,6 @@ class SearchController
         $filters    = $input;
         $pagination = $result;
 
-        require VIEWS_PATH . '/search/results.php';
+        require VIEWS_PATH . '/search/index.php';
     }
 }

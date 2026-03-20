@@ -36,37 +36,37 @@ if ($isLoggedIn) {
     <div class="container navbar-container">
         <a href="<?= BASE_URL ?>/index.php" class="logo">
             <i class="fas fa-search-location"></i>
-            Lost & Found
+            Lost<span style="color: var(--primary);">Found</span>
         </a>
 
         <nav>
             <ul class="nav-links">
-                <li><a href="<?= BASE_URL ?>/index.php?action=ads" class="nav-link">Annonces</a></li>
-                <li><a href="<?= BASE_URL ?>/index.php?action=search" class="nav-link">Rechercher</a></li>
+                <li><a href="<?= BASE_URL ?>/index.php?action=ads" class="nav-link <?= ($_GET['action'] ?? 'home') === 'ads' ? 'active' : '' ?>">Explorer</a></li>
+                <li><a href="<?= BASE_URL ?>/index.php?action=search" class="nav-link <?= ($_GET['action'] ?? '') === 'search' ? 'active' : '' ?>">Rechercher</a></li>
                 
                 <?php if ($isLoggedIn): ?>
                     <li class="nav-item-relative">
-                        <a href="<?= BASE_URL ?>/index.php?action=messages" class="nav-link">
-                            Messages
+                        <a href="<?= BASE_URL ?>/index.php?action=messages" class="nav-link <?= ($_GET['action'] ?? '') === 'messages' ? 'active' : '' ?>">
+                            Conversations
                             <?php if ($unreadCount > 0): ?>
                                 <span class="badge"><?= $unreadCount ?></span>
                             <?php endif; ?>
                         </a>
                     </li>
-                    <li><a href="<?= BASE_URL ?>/index.php?action=profile" class="nav-link"><i class="fas fa-user-circle"></i> <?= e($currentUser) ?></a></li>
+                    <li><a href="<?= BASE_URL ?>/index.php?action=profile" class="nav-link <?= ($_GET['action'] ?? '') === 'profile' ? 'active' : '' ?>"><i class="fas fa-user-circle"></i> <?= e($currentUser) ?></a></li>
                     
                     <?php if (isAdmin()): ?>
-                        <li><a href="<?= BASE_URL ?>/index.php?action=admin" class="nav-link btn btn-outline" style="padding: 4px 12px;">Admin</a></li>
+                        <li><a href="<?= BASE_URL ?>/index.php?action=admin" class="btn btn-outline" style="padding: 0.5rem 1rem; border-radius: 99px; font-size: 0.8rem;"><i class="fas fa-shield-halved"></i> Admin</a></li>
                     <?php endif; ?>
                     
-                    <li><a href="<?= BASE_URL ?>/index.php?action=logout" class="nav-link"><i class="fas fa-sign-out-alt"></i></a></li>
+                    <li><a href="<?= BASE_URL ?>/index.php?action=logout" class="nav-link" title="Déconnexion"><i class="fas fa-power-off"></i></a></li>
                 <?php else: ?>
                     <li><a href="<?= BASE_URL ?>/index.php?action=login" class="nav-link">Connexion</a></li>
-                    <li><a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary">S'inscrire</a></li>
+                    <li><a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary">Créer un compte</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
     </div>
 </header>
 
-<main class="container" style="min-height: calc(100vh - 250px); padding-top: 2rem;">
+<main class="container" style="min-height: calc(100vh - 280px); padding: 3rem 1.5rem;">

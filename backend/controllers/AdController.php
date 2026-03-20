@@ -70,6 +70,42 @@ class AdController
         require VIEWS_PATH . '/ads/create.php';
     }
 
+    public function edit(): void
+    {
+        requireLogin();
+        $id = (int)($_GET['id'] ?? 0);
+        $ad = $this->adModel->findById($id);
+
+        if (!$ad || (int)$ad['user_id'] !== currentUserId()) {
+            redirect('profile');
+        }
+
+        $errors = [];
+        $old    = $ad;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            checkCsrf();
+            if (empty($_POST['title'])) $errors[] = "Le titre est requis.";
+
+            $photoPath = $ad['photo_path'];
+            if (!empty($_FILES['photo']['name'])) {
+                $newPhoto = $this->uploadService->store($_FILES['photo']);
+                if ($newPhoto) $photoPath = $newPhoto;
+                else $errors[] = "Erreur lors de l'upload de l'image.";
+            }
+
+            if (empty($errors)) {
+                $data = $_POST;
+                $data['photo_path'] = $photoPath;
+                $this->adModel->update($id, $data);
+                redirect('ads.view', ['id' => $id]);
+            }
+            $old = $_POST;
+        }
+
+        require VIEWS_PATH . '/ads/edit.php';
+    }
+
     public function changeStatus(): void
     {
         requireLogin();

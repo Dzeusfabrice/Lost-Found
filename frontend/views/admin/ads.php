@@ -1,75 +1,112 @@
 <?php
-$pageTitle = "Modération des annonces";
+/**
+ * views/admin/ads.php — Modération des annonces
+ * Variables : $ads (array)
+ */
+$pageTitle = "Annonces (Admin)";
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
-    <h1><i class="fas fa-tasks"></i> Modération des annonces</h1>
-    <a href="<?= BASE_URL ?>/index.php?action=admin" class="btn btn-outline">Retour Dashboard</a>
+<div class="admin-ads-page">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1>Modération des annonces</h1>
+        <div class="filters" style="display: flex; gap: 1rem;">
+             <select id="ad-filter" class="form-control" style="width: 150px;">
+                <option value="">Tous types</option>
+                <option value="perdu">Perdus</option>
+                <option value="trouvé">Trouvés</option>
+             </select>
+            <input type="text" id="ad-search" class="form-control" placeholder="Rechercher une annonce..." style="width: 250px;">
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 100px;">Photo</th>
+                    <th style="width: 250px;">Titre</th>
+                    <th>Auteur</th>
+                    <th>Ville</th>
+                    <th>Type</th>
+                    <th>Date pub</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($ads as $a): ?>
+                    <tr class="ad-row" data-type="<?= strtolower(e($a['type'])) ?>">
+                        <td>
+                            <?php if ($a['photo_path']): ?>
+                                <img src="<?= UPLOADS_URL ?>/<?= e($a['photo_path']) ?>" alt="<?= e($a['title']) ?>" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                            <?php else: ?>
+                                <div style="width: 60px; height: 60px; background: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            <?php endif; ?>
+                        </td>
+                        <td style="font-weight: 500;"><?= e($a['title']) ?></td>
+                        <td><?= e($a['user_name']) ?></td>
+                        <td><?= e($a['city']) ?></td>
+                        <td>
+                            <span class="badge-status badge-<?= strtolower(e($a['type'])) ?>" style="font-size: 0.7rem;">
+                                <?= e(strtoupper($a['type'])) ?>
+                            </span>
+                        </td>
+                        <td class="text-muted" style="font-size: 0.85rem;"><?= date('d/m/Y', strtotime($a['created_at'])) ?></td>
+                        <td>
+                            <span class="badge-status <?= $a['status'] === 'resolved' ? 'badge-resolved' : ($a['type'] === 'lost' ? 'badge-lost' : 'badge-found') ?>">
+                                <?= e(ucfirst($a['status'])) ?>
+                            </span>
+                        </td>
+                        <td style="text-align: right;">
+                           <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                <form action="<?= BASE_URL ?>/index.php?action=admin_ads" method="POST" onsubmit="return confirm('Masquer cette annonce ?')">
+                                    <input type="hidden" name="ad_id" value="<?= $a['id'] ?>">
+                                    <input type="hidden" name="operation" value="hide">
+                                    <button type="submit" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.8rem; color: #475569; border-color: #cbd5e1;" title="Masquer">
+                                       <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </form>
+                                <form action="<?= BASE_URL ?>/index.php?action=admin_ads" method="POST" onsubmit="return confirm('Confirmer la suppression définitive ?')">
+                                    <input type="hidden" name="ad_id" value="<?= $a['id'] ?>">
+                                    <input type="hidden" name="operation" value="delete">
+                                    <button type="submit" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.8rem; color: var(--danger); border-color: #fca5a5;" title="Supprimer">
+                                       <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                           </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div style="background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0;">
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
-        <thead style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-            <tr>
-                <th style="padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 600;">Annonce</th>
-                <th style="padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 600;">Auteur</th>
-                <th style="padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 600;">Type / Statut</th>
-                <th style="padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 600;">Date</th>
-                <th style="padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 600; text-align: right;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($ads as $ad): ?>
-                <tr style="border-bottom: 1px solid #f1f5f9; background: <?= $ad['is_hidden'] ? '#fff7ed' : 'transparent' ?>;">
-                    <td style="padding: 1rem 1.5rem;">
-                        <div style="font-weight: 600;"><?= e($ad['title']) ?></div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);"><?= e($ad['city']) ?> (<?= e($ad['category']) ?>)</div>
-                    </td>
-                    <td style="padding: 1rem 1.5rem; font-size: 0.9rem;">
-                        <span style="color: var(--text-main);"><?= e($ad['user_name']) ?></span>
-                    </td>
-                    <td style="padding: 1rem 1.5rem;">
-                        <div style="display: flex; gap: 5px;">
-                            <span style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; background: <?= $ad['type'] === 'lost' ? '#fee2e2' : '#fef3c7' ?>; color: <?= $ad['type'] === 'lost' ? '#ef4444' : '#f59e0b' ?>;">
-                                <?= strtoupper($ad['type']) ?>
-                            </span>
-                            <span style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; background: <?= $ad['status'] === 'resolved' ? '#dcfce7' : '#f1f5f9' ?>; color: <?= $ad['status'] === 'resolved' ? '#10b981' : '#64748b' ?>;">
-                                <?= strtoupper($ad['status']) ?>
-                            </span>
-                        </div>
-                    </td>
-                    <td style="padding: 1rem 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
-                        <?= date('d/m/Y', strtotime($ad['created_at'])) ?>
-                    </td>
-                    <td style="padding: 1rem 1.5rem; text-align: right;">
-                        <div style="display: flex; gap: 8px; justify-content: flex-end;">
-                            <form action="<?= BASE_URL ?>/index.php?action=admin.hide.ad" method="POST">
-                                <?= csrfField() ?>
-                                <input type="hidden" name="id" value="<?= $ad['id'] ?>">
-                                <input type="hidden" name="hidden" value="<?= $ad['is_hidden'] ? '0' : '1' ?>">
-                                <button type="submit" class="btn btn-outline" title="<?= $ad['is_hidden'] ? 'Afficher' : 'Masquer' ?>" style="padding: 6px 10px; font-size: 0.8rem;">
-                                    <i class="fas <?= $ad['is_hidden'] ? 'fa-eye' : 'fa-eye-slash' ?>"></i>
-                                </button>
-                            </form>
-                            
-                            <form action="<?= BASE_URL ?>/index.php?action=admin.delete.ad" method="POST">
-                                <?= csrfField() ?>
-                                <input type="hidden" name="id" value="<?= $ad['id'] ?>">
-                                <button type="submit" class="btn btn-outline btn-confirm" style="padding: 6px 10px; font-size: 0.8rem; color: var(--danger);">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                            
-                            <a href="<?= BASE_URL ?>/index.php?action=ads.view&id=<?= $ad['id'] ?>" class="btn btn-outline" style="padding: 6px 10px; font-size: 0.8rem;">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+<script>
+    const filterSelect = document.getElementById('ad-filter');
+    const searchInput = document.getElementById('ad-search');
+    
+    function applyFilters() {
+        const type = filterSelect.value.toLowerCase();
+        const search = searchInput.value.toLowerCase();
+        const rows = document.querySelectorAll('.ad-row');
+        
+        rows.forEach(row => {
+            const rowType = row.getAttribute('data-type').toLowerCase();
+            const rowText = row.innerText.toLowerCase();
+            
+            const matchesType = type === "" || rowType === type;
+            const matchesSearch = search === "" || rowText.includes(search);
+            
+            row.style.display = matchesType && matchesSearch ? '' : 'none';
+        });
+    }
+
+    filterSelect.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
+</script>
 
 <?php require VIEWS_PATH . '/layouts/footer.php'; ?>
