@@ -7,7 +7,7 @@ require VIEWS_PATH . '/layouts/header.php';
 ?>
 
 <div style="margin-bottom: 4rem;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; background: white; padding: 2.5rem; border-radius: 2.5rem; box-shadow: var(--shadow-xl); border: 1px solid rgba(226, 232, 240, 0.4);">
+    <div class="res-flex res-padding" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; background: white; padding: 2.5rem; border-radius: 2.5rem; box-shadow: var(--shadow-xl); border: 1px solid rgba(226, 232, 240, 0.4);">
         <div>
             <div style="display: inline-flex; align-items: center; gap: 8px; background: #e0e7ff; color: var(--primary); padding: 4px 12px; border-radius: 99px; font-size: 0.7rem; font-weight: 800; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Dernières publications</div>
             <h1 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.5rem; color: var(--text-main);">Explorer les <span class="text-gradient">annonces.</span></h1>

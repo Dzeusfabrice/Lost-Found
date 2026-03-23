@@ -1,64 +1,90 @@
 <?php
 /**
- * views/auth/login.php — Login Startup Style
+ * views/auth/login.php — Login Style Pro (Image inspired)
  */
-$pageTitle = "Déverrouiller l'accès";
-require VIEWS_PATH . '/layouts/header.php';
+$pageTitle = "Connexion";
+// On n'utilise pas le header standard pour avoir le fond ciel complet
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | LostFound</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { margin: 0; padding: 0; }
+        .auth-page-bg {
+            background: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=2000') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="auth-page-bg">
 
-<div style="max-width: 500px; margin: 4rem auto; position: relative;">
-    <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: var(--primary-soft); filter: blur(80px); border-radius: 50%; z-index: -1;"></div>
-    
-    <div class="card" style="padding: 4rem 3rem; border: none; background: white; border-radius: 3rem; box-shadow: var(--shadow-xl); text-align: center;">
-        <div style="width: 72px; height: 72px; background: var(--primary-soft); color: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2.5rem; font-size: 1.8rem; box-shadow: var(--shadow-md);">
-            <i class="fas fa-lock-open"></i>
+<div class="form-pro-card">
+    <div class="form-icon-header">
+        <i class="fas fa-sign-in-alt"></i>
+    </div>
+
+    <h1 class="form-pro-title">Connectez-vous</h1>
+    <p class="form-pro-subtitle">Connectez-vous à votre compte pour gérer vos objets perdus et trouvés en toute simplicité.</p>
+
+    <?php if ($error): ?>
+        <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 1rem; border-radius: 14px; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem;">
+            <?= e($error) ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="<?= BASE_URL ?>/index.php?action=login" method="POST">
+        <div class="input-group-pro">
+            <i class="fas fa-envelope main-icon"></i>
+            <input type="email" name="email" class="form-control-pro" placeholder="Email" required autofocus>
         </div>
         
-        <h1 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.75rem; color: var(--text-main);">Identifiez-vous.</h1>
-        <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 3rem; font-weight: 500;">Entrez vos identifiants pour accéder à votre espace sécurisé.</p>
-
-        <?php if (isset($_GET['registered'])): ?>
-            <div style="background: #d1fae5; color: #10b981; padding: 1rem; border-radius: 1.25rem; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <i class="fas fa-check-circle"></i> Votre compte est prêt !
-            </div>
-        <?php endif; ?>
-
-        <?php if ($error): ?>
-            <div style="background: #fee2e2; color: #ef4444; padding: 1rem; border-radius: 1.25rem; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <i class="fas fa-exclamation-triangle"></i> <?= e($error) ?>
-            </div>
-        <?php endif; ?>
-
-        <form action="<?= BASE_URL ?>/index.php?action=login" method="POST" style="text-align: left;">
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label class="form-label">Adresse email</label>
-                <div style="position: relative;">
-                    <i class="fas fa-envelope" style="position: absolute; left: 20px; top: 18px; color: #cbd5e1;"></i>
-                    <input type="email" name="email" class="form-control" placeholder="nom@exemple.com" required autofocus style="padding-left: 3rem; border-radius: 1.25rem; height: 56px;">
-                </div>
-            </div>
-            
-            <div class="form-group" style="margin-bottom: 2.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-                    <label class="form-label" style="margin-bottom: 0;">Mot de passe</label>
-                    <a href="#" style="font-size: 0.8rem; color: var(--primary); text-decoration: none; font-weight: 700;">Secret oublié ?</a>
-                </div>
-                <div style="position: relative;">
-                    <i class="fas fa-shield-keyhole" style="position: absolute; left: 20px; top: 18px; color: #cbd5e1;"></i>
-                    <input type="password" name="password" class="form-control" placeholder="••••••••" required style="padding-left: 3rem; border-radius: 1.25rem; height: 56px;">
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; height: 60px; border-radius: 1.5rem; font-size: 1.1rem; box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);">
-                Se connecter
-            </button>
-        </form>
-
-        <div style="text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 1.05rem; font-weight: 500;">
-            Pas encore de compte ? 
-            <a href="<?= BASE_URL ?>/index.php?action=register" style="color: var(--primary); font-weight: 800; text-decoration: none;">S'inscrire gratuitement</a>
+        <div class="input-group-pro">
+            <i class="fas fa-lock main-icon"></i>
+            <input type="password" name="password" id="password" class="form-control-pro" placeholder="Mot de passe" required>
+            <i class="fas fa-eye-slash toggle-icon" onclick="togglePassword()"></i>
         </div>
+
+        <div style="text-align: right; margin-bottom: 2rem;">
+            <a href="#" style="color: #64748b; font-size: 0.85rem; text-decoration: none; font-weight: 700;">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="btn-black-pro">Se connecter</button>
+    </form>
+
+    <div class="divider-pro">
+        <span>Ou continuer avec</span>
+    </div>
+
+    <div class="social-links-pro">
+        <div class="social-btn-pro"><img src="https://img.icons8.com/color/48/000000/google-logo.png" style="width: 24px;"></div>
+        <div class="social-btn-pro"><i class="fab fa-facebook-f" style="color: #1877f2;"></i></div>
+        <div class="social-btn-pro"><i class="fab fa-apple" style="color: #000000;"></i></div>
+    </div>
+
+    <div style="margin-top: 3rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">
+        Pas encore de compte ? 
+        <a href="<?= BASE_URL ?>/index.php?action=register" style="color: #1e293b; font-weight: 800; text-decoration: none;">S'inscrire</a>
     </div>
 </div>
 
-<?php require VIEWS_PATH . '/layouts/footer.php'; ?>
+<script>
+function togglePassword() {
+    const pwd = document.getElementById('password');
+    const icon = document.querySelector('.toggle-icon');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    } else {
+        pwd.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+    }
+}
+</script>
+
+</body>
+</html>

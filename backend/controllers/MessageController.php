@@ -41,6 +41,11 @@ class MessageController
         $conversation = $this->conversationModel->findById($convId);
         $ad           = $this->adModel->findById($adId = (int)$conversation['ad_id']);
 
+        // Identifier l'autre utilisateur pour la vue
+        $otherUserId  = ($conversation['user1_id'] == $userId) ? $conversation['user2_id'] : $conversation['user1_id'];
+        $userModel    = ModelFactory::create('user');
+        $otherUser    = $userModel->findById($otherUserId);
+
         require VIEWS_PATH . '/messages/view.php';
     }
 

@@ -14,7 +14,7 @@ require VIEWS_PATH . '/layouts/header.php';
             <span style="font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Service Citoyen & Gratuit</span>
         </div>
         
-        <h1 style="font-size: 4.5rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 2rem;">
+        <h1 class="h1-res" style="font-size: 4.5rem; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 2rem;">
             Retrouvez ce qui vous <br> <span class="text-gradient">appartient.</span>
         </h1>
         
@@ -22,18 +22,18 @@ require VIEWS_PATH . '/layouts/header.php';
             Connectez les objets perdus à leurs propriétaires en un clic. Une plateforme moderne, simple et solidaire pour toute la communauté.
         </p>
         
-        <div style="display: flex; gap: 1.5rem; justify-content: center;">
-            <a href="<?= BASE_URL ?>/index.php?action=search" class="btn btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.1rem; border-radius: var(--radius-lg);">
+        <div class="res-flex" style="display: flex; gap: 1.5rem; justify-content: center;">
+            <a href="<?= BASE_URL ?>/index.php?action=search" class="btn btn-primary" style="padding: 1.25rem 2.5rem; font-size: 1.1rem; border-radius: var(--radius-lg); width: auto;">
                 <i class="fas fa-search"></i> Explorer les annonces
             </a>
-            <a href="<?= BASE_URL ?>/index.php?action=ads.create" class="btn btn-outline" style="padding: 1.25rem 2.5rem; font-size: 1.1rem; border-radius: var(--radius-lg);">
+            <a href="<?= BASE_URL ?>/index.php?action=ads.create" class="btn btn-outline" style="padding: 1.25rem 2.5rem; font-size: 1.1rem; border-radius: var(--radius-lg); width: auto;">
                 <i class="fas fa-plus-circle"></i> Publier un signalement
             </a>
         </div>
     </div>
 </div>
 
-<div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin: 4rem 0;">
+<div class="features-grid res-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin: 4rem 0;">
     <div class="card" style="border: none; background: white; padding: 3rem; text-align: center;">
         <div style="width: 64px; height: 64px; background: #fee2e2; color: #ef4444; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 1.5rem; box-shadow: 0 10px 15px -5px rgba(239, 68, 68, 0.2);">
             <i class="fas fa-bullhorn"></i>
@@ -59,7 +59,7 @@ require VIEWS_PATH . '/layouts/header.php';
     </div>
 </div>
 
-<div style="background: linear-gradient(135deg, var(--text-main), #1e293b); border-radius: var(--radius-lg); padding: 5rem; text-align: center; color: white; margin-bottom: 4rem; box-shadow: var(--shadow-xl); position: relative; overflow: hidden;">
+<div class="res-padding" style="background: linear-gradient(135deg, var(--text-main), #1e293b); border-radius: var(--radius-lg); padding: 5rem; text-align: center; color: white; margin-bottom: 4rem; box-shadow: var(--shadow-xl); position: relative; overflow: hidden;">
     <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: var(--primary); opacity: 0.1; filter: blur(50px); border-radius: 50%;"></div>
     <div style="max-width: 700px; margin: 0 auto; position: relative; z-index: 1;">
         <h2 style="font-size: 3rem; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -1px;">Prêt à retrouver vos affaires ?</h2>

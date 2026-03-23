@@ -32,8 +32,8 @@ require VIEWS_PATH . '/layouts/header.php';
                 <a href="<?= BASE_URL ?>/index.php?action=messages.view&id=<?= $conv['id'] ?>" style="text-decoration: none; display: block; group">
                     <div class="card" style="padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; position: relative; border-color: transparent;">
                         <!-- Avatar -->
-                        <div style="position: relative;">
-                            <div style="width: 64px; height: 64px; background: #e0e7ff; color: var(--primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; font-weight: 800; transform: rotate(-3deg); transition: var(--transition);">
+                        <div style="position: relative;" class="res-avatar-container">
+                            <div class="avatar-chat" style="width: 64px; height: 64px; background: #e0e7ff; color: var(--primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; font-weight: 800; transform: rotate(-3deg); transition: var(--transition); flex-shrink: 0;">
                                 <?= strtoupper(substr($conv['other_user_name'], 0, 1)) ?>
                             </div>
                             <?php if ($conv['unread_count'] > 0): ?>

@@ -6,10 +6,10 @@ $pageTitle = "Discussion avec " . e($otherUser['name'] ?? 'Utilisateur');
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 2rem; align-items: flex-start; height: calc(100vh - 200px);">
+<div class="res-flex" style="max-width: 1000px; margin: 0 auto; display: flex; gap: 2rem; align-items: flex-start; min-height: calc(100vh - 200px);">
     
     <!-- Sidebar Annonce -->
-    <div style="flex: 1; position: sticky; top: 100px;">
+    <div class="res-hide" style="flex: 1; position: sticky; top: 100px;">
         <div class="card" style="padding: 1.5rem; border: none; background: white; border-radius: 2rem; box-shadow: var(--shadow-xl);">
             <div style="margin-bottom: 2rem; text-align: center;">
                 <div style="width: 100%; height: 150px; background: #f1f5f9; border-radius: 1.5rem; overflow: hidden; margin-bottom: 1.5rem; position: relative;">
@@ -44,7 +44,7 @@ require VIEWS_PATH . '/layouts/header.php';
     </div>
 
     <!-- Zone Chat Chat -->
-    <div style="flex: 2; height: 100%; display: flex; flex-direction: column; background: white; border-radius: 2.5rem; box-shadow: var(--shadow-xl); overflow: hidden; border: 1px solid rgba(226, 232, 240, 0.4);">
+    <div class="chat-window" style="flex: 2; height: 600px; display: flex; flex-direction: column; background: white; border-radius: 2.5rem; box-shadow: var(--shadow-xl); overflow: hidden; border: 1px solid rgba(226, 232, 240, 0.4);">
         <!-- Header Chat -->
         <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; background: white; display: flex; justify-content: space-between; align-items: center; z-index: 10;">
              <div style="display: flex; align-items: center; gap: 12px;">
@@ -77,7 +77,8 @@ require VIEWS_PATH . '/layouts/header.php';
         <!-- Zone Formulaire -->
         <div style="padding: 1.5rem 2rem; background: white; border-top: 1px solid #f1f5f9;">
             <form action="<?= BASE_URL ?>/index.php?action=messages.send" method="POST" style="display: flex; gap: 12px; align-items: center;">
-                <input type="hidden" name="conversation_id" value="<?= $id ?>">
+                <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                <input type="hidden" name="conversation_id" value="<?= $convId ?>">
                 <div style="flex: 1; position: relative;">
                     <textarea name="body" class="form-control" rows="1" placeholder="Écrivez votre message..." required style="border-radius: 99px; padding: 0.85rem 1.5rem; min-height: 50px; resize: none; overflow: hidden; border: 2px solid #f1f5f9; background: #f8fafc; font-weight: 500;"></textarea>
                     <div style="position: absolute; right: 15px; top: 12px; color: #cbd5e1; display: flex; gap: 10px; font-size: 1.1rem;">

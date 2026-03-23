@@ -1,74 +1,95 @@
 <?php
 /**
- * views/auth/register.php — Inscription Startup Style
+ * views/auth/register.php — Inscription Style Pro (Inspiré par l'image)
  */
-$pageTitle = "Créer mon compte";
-require VIEWS_PATH . '/layouts/header.php';
+$pageTitle = "Inscription";
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S'inscrire | LostFound</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { margin: 0; padding: 0; }
+        .auth-page-bg {
+            background: url('https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&q=80&w=2000') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="auth-page-bg">
 
-<div style="max-width: 550px; margin: 3rem auto; position: relative;">
-    <div style="position: absolute; bottom: -50px; right: -50px; width: 250px; height: 250px; background: rgba(168, 85, 247, 0.1); filter: blur(90px); border-radius: 50%; z-index: -1;"></div>
-    
-    <div class="card" style="padding: 4rem 3.5rem; border: none; background: white; border-radius: 3.5rem; box-shadow: var(--shadow-xl); text-align: center;">
-        <div style="width: 72px; height: 72px; background: var(--primary-soft); color: var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 2.5rem; font-size: 1.8rem; box-shadow: var(--shadow-md);">
-            <i class="fas fa-user-plus"></i>
+<div class="form-pro-card" style="max-width: 520px; padding: 4rem 3.5rem;">
+    <div class="form-icon-header">
+        <i class="fas fa-user-plus"></i>
+    </div>
+
+    <h1 class="form-pro-title">Créer un compte</h1>
+    <p class="form-pro-subtitle">Rejoignez la plus grande communauté de recherche d'objets perdus et trouvés gratuitement.</p>
+
+    <form action="<?= BASE_URL ?>/index.php?action=register" method="POST">
+        <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+        
+        <div class="input-group-pro">
+            <i class="fas fa-user main-icon"></i>
+            <input type="text" name="name" class="form-control-pro" placeholder="Nom complet" value="<?= e($old['name'] ?? '') ?>" required autofocus>
+            <?php if (isset($errors['name'])): ?>
+                <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 5px; text-align: left; padding-left: 1rem;"><?= e($errors['name']) ?></span>
+            <?php endif; ?>
         </div>
         
-        <h1 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.75rem; color: var(--text-main);">Rejoignez-nous.</h1>
-        <p class="text-muted" style="font-size: 1.1rem; margin-bottom: 3rem; font-weight: 500;">Créez votre compte LostFound pour signaler et retrouver des objets.</p>
-
-        <?php if (!empty($errors)): ?>
-            <div style="background: #fee2e2; color: #ef4444; padding: 1.25rem; border-radius: 1.5rem; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem; text-align: left; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(239, 68, 68, 0.2);">
-                <i class="fas fa-exclamation-circle" style="font-size: 1.25rem;"></i> Correction requise.
-            </div>
-        <?php endif; ?>
-
-        <form action="<?= BASE_URL ?>/index.php?action=register" method="POST" style="text-align: left;">
-            <input type="hidden" name="csrf_token" value="<?= getCsrfToken() ?>">
-            
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label class="form-label">Nom complet</label>
-                <div style="position: relative;">
-                    <i class="fas fa-user-circle" style="position: absolute; left: 20px; top: 18px; color: #cbd5e1;"></i>
-                    <input type="text" name="name" class="form-control" placeholder="Jean Dupont" value="<?= e($old['name'] ?? '') ?>" required autofocus style="padding-left: 3rem; border-radius: 1.25rem; height: 56px;">
-                </div>
-                <?php if (isset($errors['name'])): ?>
-                    <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 6px; padding-left: 1rem;"><?= e($errors['name']) ?></span>
-                <?php endif; ?>
-            </div>
-            
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label class="form-label">Adresse email</label>
-                <div style="position: relative;">
-                    <i class="fas fa-envelope" style="position: absolute; left: 20px; top: 18px; color: #cbd5e1;"></i>
-                    <input type="email" name="email" class="form-control" placeholder="nom@exemple.com" value="<?= e($old['email'] ?? '') ?>" required style="padding-left: 3rem; border-radius: 1.25rem; height: 56px;">
-                </div>
-                <?php if (isset($errors['email'])): ?>
-                    <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 6px; padding-left: 1rem;"><?= e($errors['email']) ?></span>
-                <?php endif; ?>
-            </div>
-            
-            <div class="form-group" style="margin-bottom: 2.5rem;">
-                <label class="form-label">Mot de passe secret</label>
-                <div style="position: relative;">
-                    <i class="fas fa-shield-keyhole" style="position: absolute; left: 20px; top: 18px; color: #cbd5e1;"></i>
-                    <input type="password" name="password" class="form-control" placeholder="8 caractères minimum" required style="padding-left: 3rem; border-radius: 1.25rem; height: 56px;">
-                </div>
-                <?php if (isset($errors['password'])): ?>
-                    <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 6px; padding-left: 1rem;"><?= e($errors['password']) ?></span>
-                <?php endif; ?>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; height: 60px; border-radius: 1.5rem; font-size: 1.1rem; box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);">
-                Rejoindre le service
-            </button>
-        </form>
-
-        <div style="text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 1.05rem; font-weight: 500;">
-            Déjà inscrit ? 
-            <a href="<?= BASE_URL ?>/index.php?action=login" style="color: var(--primary); font-weight: 800; text-decoration: none;">Accédez à votre compte</a>
+        <div class="input-group-pro">
+            <i class="fas fa-envelope main-icon"></i>
+            <input type="email" name="email" class="form-control-pro" placeholder="Email professionnel" value="<?= e($old['email'] ?? '') ?>" required>
+            <?php if (isset($errors['email'])): ?>
+                <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 5px; text-align: left; padding-left: 1rem;"><?= e($errors['email']) ?></span>
+            <?php endif; ?>
         </div>
+        
+        <div class="input-group-pro">
+            <i class="fas fa-lock main-icon"></i>
+            <input type="password" name="password" id="password" class="form-control-pro" placeholder="Mot de passe secret" required>
+            <i class="fas fa-eye-slash toggle-icon" onclick="togglePassword()"></i>
+            <?php if (isset($errors['password'])): ?>
+                <span style="color: #ef4444; font-size: 0.75rem; font-weight: 700; display: block; margin-top: 5px; text-align: left; padding-left: 1rem;"><?= e($errors['password']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <button type="submit" class="btn-black-pro">Créer mon compte</button>
+    </form>
+
+    <div class="divider-pro">
+        <span>Ou s'inscrire avec</span>
+    </div>
+
+    <div class="social-links-pro">
+        <div class="social-btn-pro"><img src="https://img.icons8.com/color/48/000000/google-logo.png" style="width: 24px;"></div>
+        <div class="social-btn-pro"><i class="fab fa-facebook-f" style="color: #1877f2;"></i></div>
+        <div class="social-btn-pro"><i class="fab fa-apple" style="color: #000000;"></i></div>
+    </div>
+
+    <div style="margin-top: 3rem; color: #64748b; font-size: 0.95rem; font-weight: 500;">
+        Déjà un compte ? 
+        <a href="<?= BASE_URL ?>/index.php?action=login" style="color: #1e293b; font-weight: 800; text-decoration: none;">Accéder à mon compte</a>
     </div>
 </div>
 
-<?php require VIEWS_PATH . '/layouts/footer.php'; ?>
+<script>
+function togglePassword() {
+    const pwd = document.getElementById('password');
+    const icon = document.querySelector('.toggle-icon');
+    if (pwd.type === 'password') {
+        pwd.type = 'text';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    } else {
+        pwd.type = 'password';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+    }
+}
+</script>
+
+</body>
+</html>

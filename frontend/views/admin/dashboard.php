@@ -6,8 +6,8 @@ $pageTitle = "Administration centrale";
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div class="admin-dashboard">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+<div class="admin-dashboard res-padding">
+    <div class="res-flex" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
         <div>
             <h1 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 0.5rem; color: var(--text-main);">Système de contrôle</h1>
             <p class="text-muted" style="font-size: 1.1rem;">Bienvenue dans le panneau d'administration centralisé.</p>
@@ -19,7 +19,7 @@ require VIEWS_PATH . '/layouts/header.php';
     </div>
 
     <!-- KPIs Ultra-Modernes -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem;">
+    <div class="res-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem;">
         <div class="stat-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <div style="width: 44px; height: 44px; background: #e0e7ff; color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;"><i class="fas fa-users"></i></div>
@@ -58,12 +58,12 @@ require VIEWS_PATH . '/layouts/header.php';
     </div>
 
     <!-- Actions Rapides -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+    <div class="res-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
         <div class="card" style="border: none;">
             <h3 style="margin-bottom: 2rem; font-weight: 800; display: flex; align-items: center; gap: 12px;">
                 <i class="fas fa-bolt" style="color: var(--accent);"></i> Actions de gestion prioritaires
             </h3>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+            <div class="res-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
                 <a href="<?= BASE_URL ?>/index.php?action=admin_users" class="btn btn-outline" style="justify-content: flex-start; padding: 1.5rem; text-align: left; height: auto;">
                     <div style="width: 48px; height: 48px; background: #f1f5f9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem;"><i class="fas fa-user-shield"></i></div>
                     <div>

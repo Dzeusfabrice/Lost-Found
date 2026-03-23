@@ -6,10 +6,10 @@ $pageTitle = e($ad['title']);
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; position: relative;">
+<div class="res-grid" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; position: relative;">
     
     <!-- Zone Image Floating -->
-    <div style="position: sticky; top: 120px; align-self: flex-start;">
+    <div style="position: sticky; top: 120px; align-self: flex-start;" class="res-static">
         <div class="card" style="padding: 0.75rem; border: none; background: white; border-radius: 3rem; box-shadow: var(--shadow-xl); overflow: hidden; position: relative;">
             <div style="width: 100%; height: 550px; border-radius: 2.25rem; overflow: hidden; background: #f8fafc;">
                 <?php if ($ad['photo_path']): ?>
@@ -87,13 +87,14 @@ require VIEWS_PATH . '/layouts/header.php';
                      <p class="text-muted" style="margin-bottom: 2.5rem; font-size: 1.1rem; font-weight: 500;">Ouvrez une discussion sécurisée pour organiser la remise de l'objet en main propre.</p>
                      
                      <form action="<?= BASE_URL ?>/index.php?action=messages.start" method="POST">
-                         <input type="hidden" name="csrf_token" value="<?= getCsrfToken() ?>">
+                         <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
                          <input type="hidden" name="ad_id" value="<?= $ad['id'] ?>">
-                         <div class="form-group" style="margin-bottom: 1.5rem;">
-                             <textarea name="message" class="form-control" rows="4" style="background: white; border-radius: 1.5rem; padding: 1.5rem; font-weight: 500;" placeholder="Précisez votre demande ici..."></textarea>
+                         <div class="form-group" style="margin-bottom: 2rem;">
+                             <label class="form-label" style="margin-bottom: 1rem;">Votre message</label>
+                             <textarea name="message" class="form-control" rows="4" style="background: white; border-radius: 24px; padding: 1.5rem; font-weight: 600; border: 2px solid #f1f5f9;" placeholder="Décrivez pourquoi cet objet pourrait être le vôtre ou comment l'identifier..."></textarea>
                          </div>
-                         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem; font-size: 1.1rem; border-radius: 99px;">
-                             <i class="fas fa-paper-plane"></i> Envoyer ma demande de contact
+                         <button type="submit" class="btn-black-pro">
+                             <i class="fas fa-paper-plane" style="margin-right: 10px;"></i> Démarrer la conversation sécurisée
                          </button>
                      </form>
                 </div>

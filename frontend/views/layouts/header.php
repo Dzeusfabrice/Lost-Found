@@ -40,7 +40,10 @@ if ($isLoggedIn) {
         </a>
 
         <nav>
-            <ul class="nav-links">
+            <div class="menu-toggle" id="mobile-menu-btn" style="display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-main);">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navbar-links">
                 <li><a href="<?= BASE_URL ?>/index.php?action=ads" class="nav-link <?= ($_GET['action'] ?? 'home') === 'ads' ? 'active' : '' ?>">Explorer</a></li>
                 <li><a href="<?= BASE_URL ?>/index.php?action=search" class="nav-link <?= ($_GET['action'] ?? '') === 'search' ? 'active' : '' ?>">Rechercher</a></li>
                 
@@ -62,10 +65,46 @@ if ($isLoggedIn) {
                     <li><a href="<?= BASE_URL ?>/index.php?action=logout" class="nav-link" title="Déconnexion"><i class="fas fa-power-off"></i></a></li>
                 <?php else: ?>
                     <li><a href="<?= BASE_URL ?>/index.php?action=login" class="nav-link">Connexion</a></li>
-                    <li><a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary">Créer un compte</a></li>
+                    <li><a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary" style="padding: 0.75rem 1.5rem; border-radius: 99px;">S'inscrire</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
+
+        <style>
+            @media (max-width: 768px) {
+                .menu-toggle { display: block !important; }
+                .nav-links {
+                    position: fixed;
+                    top: 80px;
+                    left: -100%;
+                    width: 100%;
+                    height: calc(100vh - 80px);
+                    background: white;
+                    flex-direction: column;
+                    padding: 2rem;
+                    gap: 1.5rem;
+                    transition: 0.3s ease-in-out;
+                    z-index: 999;
+                    display: flex !important;
+                }
+                .nav-links.active { left: 0; }
+                .nav-link { padding: 1rem 0; font-size: 1.25rem; width: 100%; text-align: left; }
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const btn = document.getElementById('mobile-menu-btn');
+                const menu = document.getElementById('navbar-links');
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        menu.classList.toggle('active');
+                        const icon = btn.querySelector('i');
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    });
+                }
+            });
+        </script>
     </div>
 </header>
 
