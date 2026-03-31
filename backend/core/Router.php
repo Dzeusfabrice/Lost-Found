@@ -10,6 +10,7 @@ class Router
     /** @var array<string, array{controller: string, method: string, auth: bool, admin: bool}> */
     private array $routes = [
         // Auth
+        'welcome'           => ['controller' => 'AuthController',    'method' => 'welcome',        'auth' => false, 'admin' => false],
         'home'              => ['controller' => 'AuthController',    'method' => 'home',           'auth' => false, 'admin' => false],
         'login'             => ['controller' => 'AuthController',    'method' => 'login',          'auth' => false, 'admin' => false],
         'register'          => ['controller' => 'AuthController',    'method' => 'register',       'auth' => false, 'admin' => false],

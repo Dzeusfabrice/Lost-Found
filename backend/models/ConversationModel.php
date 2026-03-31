@@ -49,21 +49,23 @@ class ConversationModel
     /** Toutes les conversations d'un utilisateur avec dernier message. */
     public function findByUser(int $userId): array
     {
-        $sql = 'SELECT c.*,
+        $sql = "SELECT c.*,
                        a.title AS ad_title,
-                       u1.name AS user1_name,
-                       u2.name AS user2_name,
-                       (SELECT body FROM messages WHERE conversation_id = c.id ORDER BY created_at DESC LIMIT 1) AS last_message,
-                       (SELECT created_at FROM messages WHERE conversation_id = c.id ORDER BY created_at DESC LIMIT 1) AS last_message_at,
+                       CASE 
+                           WHEN c.user1_id = ? THEN u2.name 
+                           ELSE u1.name 
+                       END AS other_user_name,
+                       (SELECT body FROM messages WHERE conversation_id = c.id ORDER BY created_at DESC LIMIT 1) AS last_message_text,
+                       (SELECT created_at FROM messages WHERE conversation_id = c.id ORDER BY created_at DESC LIMIT 1) AS last_message_date,
                        (SELECT COUNT(*) FROM messages WHERE conversation_id = c.id AND sender_id != ? AND is_read = 0) AS unread_count
                 FROM conversations c
                 JOIN ads a ON a.id = c.ad_id
                 JOIN users u1 ON u1.id = c.user1_id
                 JOIN users u2 ON u2.id = c.user2_id
                 WHERE c.user1_id = ? OR c.user2_id = ?
-                ORDER BY last_message_at DESC';
+                ORDER BY last_message_date DESC";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$userId, $userId, $userId]);
+        $stmt->execute([$userId, $userId, $userId, $userId]);
         return $stmt->fetchAll();
     }
 

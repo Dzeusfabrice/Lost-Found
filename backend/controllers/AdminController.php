@@ -19,6 +19,11 @@ class AdminController
     public function dashboard(): void
     {
         $stats = $this->adModel->getStats();
+        
+        // Ajouter le nombre total d'utilisateurs (simple count en attendant une méthode dédiée)
+        $usersCount = ModelFactory::create('user')->findAll();
+        $stats['total_users'] = count($usersCount);
+        
         require VIEWS_PATH . '/admin/dashboard.php';
     }
 

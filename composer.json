@@ -1,0 +1,15 @@
+{
+    "name": "dzeusfabrice/lostfound",
+    "description": "Lost & Found Community Platform",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "phpstan/phpstan": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "DzeusFabrice",
+            "email": "fabrice@example.com"
+        }
+    ]
+}

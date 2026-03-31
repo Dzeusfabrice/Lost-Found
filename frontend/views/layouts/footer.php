@@ -10,8 +10,8 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-logo-desc">
-                <a href="<?= BASE_URL ?>" class="logo">Lost & Found</a>
-                <p>La solution simple et efficace pour retrouver vos objets égarés et rendre les objets trouvés à leurs propriétaires.</p>
+                <a href="<?= BASE_URL ?>" class="logo">Lost<span class="text-gradient">Found</span></a>
+                <p>La solution premium pour reconnecter les objets perdus à leurs propriétaires. Sécurité, rapidité et fiabilité au cœur de notre mission.</p>
             </div>
             
             <div>
@@ -34,17 +34,17 @@
             
             <div>
                 <h4 class="footer-title">Suivez-nous</h4>
-                <div style="display: flex; gap: 15px;">
-                    <a href="#" class="nav-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="nav-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="nav-link"><i class="fab fa-instagram"></i></a>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" class="social-btn-pro" style="width: 44px; height: 44px; border-radius: 12px; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);"><i class="fab fa-facebook-f" style="color: #94a3b8;"></i></a>
+                    <a href="#" class="social-btn-pro" style="width: 44px; height: 44px; border-radius: 12px; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);"><i class="fab fa-twitter" style="color: #94a3b8;"></i></a>
+                    <a href="#" class="social-btn-pro" style="width: 44px; height: 44px; border-radius: 12px; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);"><i class="fab fa-instagram" style="color: #94a3b8;"></i></a>
                 </div>
             </div>
         </div>
         
-        <div class="footer-bottom">
-            <p>&copy; <?= date('Y') ?> Lost & Found. Réalisé dans le cadre du cours de qualité logicielle.</p>
-            <p>Développé avec <i class="fas fa-heart" style="color: var(--danger);"></i> par l'équipe L&F.</p>
+        <div class="footer-bottom res-flex">
+            <p style="margin: 0;">&copy; <?= date('Y') ?> Lost & Found. Réalisé dans le cadre du cours de qualité logicielle.</p>
+            <p style="margin: 0;">Développé avec <span style="color: #ef4444;">❤</span> par l'équipe L&F.</p>
         </div>
     </div>
 </footer>

@@ -140,11 +140,11 @@ class AdModel
     {
         $row = $this->pdo->query(
             "SELECT
-                COUNT(*) AS total,
-                SUM(type = 'lost') AS lost,
-                SUM(type = 'found') AS found,
+                COUNT(*) AS total_ads,
+                SUM(type = 'lost') AS total_lost,
+                SUM(type = 'found') AS total_found,
                 SUM(status = 'open') AS open_count,
-                SUM(status = 'resolved') AS resolved
+                SUM(status = 'resolved') AS total_resolved
              FROM ads"
         )->fetch();
         return $row ?: [];

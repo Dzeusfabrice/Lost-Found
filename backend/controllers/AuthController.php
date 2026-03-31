@@ -13,6 +13,11 @@ class AuthController
         $this->userModel = ModelFactory::create('user');
     }
 
+    public function welcome(): void
+    {
+        require VIEWS_PATH . '/welcome.php';
+    }
+
     public function home(): void
     {
         require VIEWS_PATH . '/home.php';
