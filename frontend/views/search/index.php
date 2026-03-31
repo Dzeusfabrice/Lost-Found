@@ -11,16 +11,16 @@ $type   = e($_GET['type'] ?? '');
 $city   = e($_GET['city'] ?? '');
 ?>
 
-<div class="res-padding" style="max-width: 1100px; margin: 0 auto;">
+<div class="res-padding">
     <div style="text-align: center; margin-bottom: 4rem;">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: #e0e7ff; color: var(--primary); padding: 4px 12px; border-radius: 99px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase;">Interface de recherche intelligente</div>
         <h1 class="h1-res" style="font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 1rem; color: var(--text-main);">Qu'avez-vous <span class="text-gradient">perdu ?</span></h1>
-        <p class="text-muted" style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.5;">Utilisez les filtres multicritères ci-dessous pour localiser rapidement votre objet dans notre base de données.</p>
+        <p class="text-muted" style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.5;">Utilisez les filtres multicritères ci-dessous pour localiser rapidement votre objet dans notre base de données.</p>
     </div>
 
     <!-- Moteur de Recherche Stylisé -->
     <div class="card" style="padding: 2.5rem; margin-bottom: 5rem; border: none; border-radius: 3rem; background: white; box-shadow: var(--shadow-xl);">
-        <form action="<?= BASE_URL ?>/index.php" method="GET" class="res-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 100px; gap: 1rem; align-items: flex-end;">
+        <form action="<?= BASE_URL ?>/index.php" method="GET" class="res-grid" style="display: grid; grid-template-columns: repeat(3, 1fr) 100px; gap: 1.5rem; align-items: flex-end;">
             <input type="hidden" name="action" value="search">
             
             <div class="form-group" style="margin-bottom: 0;">

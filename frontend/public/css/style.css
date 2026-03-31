@@ -70,9 +70,22 @@ body {
 }
 
 .container {
-    max-width: 1240px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 2rem;
+}
+
+/* Grid Layouts for Sidebar/Main */
+.layout-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+    align-items: start;
 }
 
 /* Navbar */
@@ -729,4 +742,279 @@ body {
         font-size: 0.9rem !important;
         margin-bottom: 2rem !important;
     }
+}
+
+/* --- Carousel Pro --- */
+.carousel-pro {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin-bottom: 5rem;
+    box-shadow: var(--shadow-xl);
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    padding: 0 6rem;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    z-index: 5;
+}
+
+.carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.65) contrast(1.1);
+    transition: transform 10s linear;
+}
+
+.carousel-item.active .carousel-img {
+    transform: scale(1.15);
+}
+
+.carousel-content {
+    max-width: 800px;
+    color: white;
+    z-index: 10;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.8s ease out 0.5s;
+}
+
+.carousel-item.active .carousel-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.carousel-content h2 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -2px;
+    line-height: 1;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-content p {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 3rem;
+    right: 6rem;
+    display: flex;
+    gap: 15px;
+    z-index: 20;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.carousel-dot.active {
+    background: var(--primary-light);
+    transform: scale(1.5);
+    box-shadow: 0 0 20px var(--primary-light);
+}
+
+@media (max-width: 768px) {
+    .carousel-pro { height: 400px; padding: 0 2rem; border-radius: 2rem; }
+    .carousel-item { padding: 0 2rem; }
+    .carousel-content h2 { font-size: 2.2rem; }
+    .carousel-content p { font-size: 1.1rem; }
+    .carousel-dots { right: 50%; transform: translateX(50%); bottom: 2rem; }
+}
+
+/* --- Ads Scrolling Ribbon (Marquee) --- */
+.ads-marquee-container {
+    width: 100%;
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    padding: 1rem 0;
+    overflow: hidden;
+    position: relative;
+    margin-top: -4.5rem; /* Overlapping the hero for a glass look */
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.ads-marquee-inner {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: scrollAds 60s linear infinite;
+}
+
+.ads-marquee-inner:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+    width: 260px;
+    height: 160px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 3px solid rgba(255,255,255,0.8);
+    transition: var(--transition);
+}
+
+.marquee-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    z-index: 50;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.marquee-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.marquee-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.marquee-overlay .m-city {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.marquee-overlay .m-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+@keyframes scrollAds {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- Testimonials Section (Pro) --- */
+.testimonials-section {
+    margin-top: 10rem;
+    position: relative;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 3.5rem;
+    border-radius: 4rem;
+    box-shadow: var(--shadow-xl);
+    height: 100%;
+    transition: var(--transition);
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: "“";
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    font-size: 8rem;
+    color: var(--primary-soft);
+    font-family: serif;
+    font-weight: 900;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-20px);
+    background: white;
+    box-shadow: 0 40px 100px -20px rgba(0,0,0,0.1);
+}
+
+.testimonial-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.t-avatar {
+    width: 64px;
+    height: 64px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.t-info h4 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.t-info span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
 }

@@ -6,7 +6,7 @@ $pageTitle = "Mon Espace";
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div class="res-padding" style="max-width: 1100px; margin: 0 auto;">
+<div class="res-padding">
     <div class="res-flex" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem;">
         <div>
             <div style="display: inline-flex; align-items: center; gap: 8px; background: #e0e7ff; color: var(--primary); padding: 4px 12px; border-radius: 99px; font-size: 0.7rem; font-weight: 800; margin-bottom: 0.75rem; text-transform: uppercase;">Centre de contrôle</div>

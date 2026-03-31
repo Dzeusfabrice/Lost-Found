@@ -8,7 +8,7 @@ require VIEWS_PATH . '/layouts/header.php';
     <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: var(--primary-soft); filter: blur(100px); border-radius: 50%; z-index: -1;"></div>
     <div style="position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px; background: rgba(168, 85, 247, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1;"></div>
 
-    <div style="max-width: 850px; margin: 0 auto;">
+    <div style="max-width: 1100px; margin: 0 auto;">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: white; padding: 6px 16px; border-radius: 99px; box-shadow: var(--shadow-sm); border: 1px solid #f1f5f9; margin-bottom: 2rem;">
             <span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block;"></span>
             <span style="font-weight: 700; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Service Citoyen & Gratuit</span>
@@ -61,7 +61,7 @@ require VIEWS_PATH . '/layouts/header.php';
 
 <div class="res-padding" style="background: linear-gradient(135deg, var(--text-main), #1e293b); border-radius: var(--radius-lg); padding: 5rem; text-align: center; color: white; margin-bottom: 4rem; box-shadow: var(--shadow-xl); position: relative; overflow: hidden;">
     <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: var(--primary); opacity: 0.1; filter: blur(50px); border-radius: 50%;"></div>
-    <div style="max-width: 700px; margin: 0 auto; position: relative; z-index: 1;">
+    <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
         <h2 style="font-size: 3rem; margin-bottom: 1.5rem; font-weight: 800; letter-spacing: -1px;">Prêt à retrouver vos affaires ?</h2>
         <p style="font-size: 1.2rem; color: #94a3b8; margin-bottom: 3rem; line-height: 1.6;">Rejoignez des milliers d'utilisateurs qui font confiance à LostFound chaque jour pour solidarité locale.</p>
         <a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary" style="background: white; color: var(--text-main); padding: 1rem 2.5rem; font-size: 1.1rem; box-shadow: none;">Créer un compte maintenant</a>

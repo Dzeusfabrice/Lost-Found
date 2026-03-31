@@ -6,20 +6,106 @@ $pageTitle = "Catalogue d'objets";
 require VIEWS_PATH . '/layouts/header.php';
 ?>
 
-<div style="margin-bottom: 4rem;">
-    <div class="res-flex res-padding" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; background: white; padding: 2.5rem; border-radius: 2.5rem; box-shadow: var(--shadow-xl); border: 1px solid rgba(226, 232, 240, 0.4);">
-        <div>
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: #e0e7ff; color: var(--primary); padding: 4px 12px; border-radius: 99px; font-size: 0.7rem; font-weight: 800; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Dernières publications</div>
-            <h1 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 0.5rem; color: var(--text-main);">Explorer les <span class="text-gradient">annonces.</span></h1>
-            <p class="text-muted" style="font-size: 1.1rem; line-height: 1.6;">Plus de 50 objets signalés cette semaine dans votre communauté.</p>
+<!-- Carousel Header Pro -->
+<div class="carousel-pro">
+    <div class="carousel-inner" id="carousel">
+        <div class="carousel-item active">
+            <img src="<?= BASE_URL ?>/frontend/public/img/carousel/slide1.png" class="carousel-img" alt="Slide 1">
+            <div class="carousel-content">
+                <h2>Explorer les <br><span class="text-gradient" style="background: linear-gradient(135deg, #fff, #cbd5e1); -webkit-background-clip: text; color: transparent;">annonces.</span></h2>
+                <p>Découvrez les objets signalés dans votre communauté aujourd'hui. Chaque annonce est une chance de plus de réunir un objet et son propriétaire.</p>
+                <a href="<?= BASE_URL ?>/index.php?action=ads.create" class="btn btn-primary" style="padding: 1.25rem 2.5rem; border-radius: 99px;">
+                    <i class="fas fa-plus-circle"></i> Publier un signalement
+                </a>
+            </div>
         </div>
-        <div>
-            <a href="<?= BASE_URL ?>/index.php?action=ads.create" class="btn btn-primary" style="padding: 1.25rem 2.5rem; border-radius: 99px;">
-                <i class="fas fa-plus-circle"></i> Publier une annonce
-            </a>
+        <div class="carousel-item">
+            <img src="<?= BASE_URL ?>/frontend/public/img/carousel/slide2.png" class="carousel-img" alt="Slide 2">
+            <div class="carousel-content">
+                <h2>Rendre <br><span class="text-gradient" style="background: linear-gradient(135deg, #fff, #fef3c7); -webkit-background-clip: text; color: transparent;">service.</span></h2>
+                <p>Vous avez trouvé un objet ? Votre geste solidaire peut soulager quelqu'un d'autre. Signalez-le en quelques secondes.</p>
+                <a href="<?= BASE_URL ?>/index.php?action=ads.create" class="btn btn-primary" style="padding: 1.25rem 2.5rem; border-radius: 99px;">
+                    <i class="fas fa-hand-holding-heart"></i> J'ai trouvé un objet
+                </a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="<?= BASE_URL ?>/frontend/public/img/carousel/slide3.png" class="carousel-img" alt="Slide 3">
+            <div class="carousel-content">
+                <h2>Solidarité <br><span class="text-gradient" style="background: linear-gradient(135deg, #fff, #e0e7ff); -webkit-background-clip: text; color: transparent;">locale.</span></h2>
+                <p>Une plateforme moderne et sécurisée pour connecter les citoyens. Plus de 500 objets restitués ce mois-ci.</p>
+                <a href="<?= BASE_URL ?>/index.php?action=register" class="btn btn-primary" style="padding: 1.25rem 2.5rem; border-radius: 99px;">
+                    <i class="fas fa-user-plus"></i> Rejoindre la communauté
+                </a>
+            </div>
         </div>
     </div>
 
+    <!-- Pagination dots -->
+    <div class="carousel-dots" id="dots">
+        <div class="carousel-dot active" onclick="setSlide(0)"></div>
+        <div class="carousel-dot" onclick="setSlide(1)"></div>
+        <div class="carousel-dot" onclick="setSlide(2)"></div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let slideInterval = setInterval(nextSlide, 6000);
+
+    function nextSlide() {
+        setSlide((currentSlide + 1) % slides.length);
+    }
+
+    function setSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        
+        // Reset timer
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 6000);
+    }
+<!-- Ads Marquee Ribbon -->
+<?php if (!empty($ads)): ?>
+<div class="ads-marquee-container">
+    <div class="ads-marquee-inner">
+        <?php 
+        // We duplicate the ads array a few times to ensure a smooth infinite scroll feel
+        $marqueeAds = array_merge($ads, $ads, $ads);
+        foreach ($marqueeAds as $ad): 
+        ?>
+            <a href="<?= BASE_URL ?>/index.php?action=ads.view&id=<?= $ad['id'] ?>" class="marquee-item">
+                <?php if ($ad['photo_path']): ?>
+                    <img src="<?= UPLOADS_URL ?>/<?= e($ad['photo_path']) ?>" class="marquee-img" alt="<?= e($ad['title']) ?>">
+                <?php else: ?>
+                    <div style="width: 100%; height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1;"><i class="fas fa-camera"></i></div>
+                <?php endif; ?>
+                <div class="marquee-overlay">
+                    <span class="m-city"><?= e($ad['city']) ?></span>
+                    <span class="m-title"><?= e($ad['title']) ?></span>
+                </div>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<div style="margin-top: 6rem; margin-bottom: 4rem;">
+    <!-- Gallery Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; padding-left: 1rem; border-left: 6px solid var(--primary);">
+        <div>
+            <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 0.5rem;">Tous les <span class="text-gradient">signalements.</span></h2>
+            <p class="text-muted" style="font-size: 1.1rem;">Explorez la base de données complète des objets perdus et trouvés.</p>
+        </div>
+        <div style="display: flex; gap: 1rem;">
+             <a href="<?= BASE_URL ?>/index.php?action=search" class="btn btn-outline" style="border-radius: 99px;"><i class="fas fa-filter"></i> Filtrer</a>
+        </div>
+    </div>
     <?php if (empty($ads)): ?>
         <div class="card" style="text-align: center; padding: 6rem; border: none; border-radius: 3rem; box-shadow: var(--shadow-lg);">
             <div style="width: 100px; height: 100px; background: #f1f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 3rem; color: #cbd5e1;">
@@ -30,13 +116,16 @@ require VIEWS_PATH . '/layouts/header.php';
             <a href="<?= BASE_URL ?>/index.php?action=search" class="btn btn-outline" style="padding: 1rem 2.5rem; border-radius: 99px;">Lancer une recherche précise</a>
         </div>
     <?php else: ?>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem;">
             <?php foreach ($ads as $ad): ?>
                 <div class="card" style="padding: 0; background: white; border-radius: 2.5rem; border: none; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; position: relative;">
-                    <!-- Floating Type Badge -->
-                    <span class="badge-status badge-<?= strtolower(e($ad['type'])) ?>" style="position: absolute; top: 20px; right: 20px; z-index: 10; font-size: 0.65rem; font-weight: 800; border: 2px solid white; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-                        <?= strtoupper($ad['type']) ?>
-                    </span>
+                    <!-- Floating Type Badge Pro -->
+                    <div style="position: absolute; top: 25px; left: 25px; z-index: 10; display: flex; flex-direction: column; gap: 8px;">
+                        <span class="badge-status badge-<?= strtolower(e($ad['type'])) ?>" style="font-size: 0.75rem; font-weight: 800; padding: 10px 20px; border-radius: 99px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); border: 2px solid white;">
+                            <i class="<?= $ad['type'] === 'lost' ? 'fas fa-search' : 'fas fa-check-circle' ?>" style="margin-right: 5px;"></i>
+                            OBJET <?= strtoupper($ad['type'] === 'lost' ? 'PERDU' : 'TROUVÉ') ?>
+                        </span>
+                    </div>
                     
                     <!-- Preview Image -->
                     <div style="width: 100%; height: 260px; overflow: hidden; position: relative;">
@@ -89,6 +178,51 @@ require VIEWS_PATH . '/layouts/header.php';
                 <?php endfor; ?>
             </div>
         <?php endif; ?>
+
+        <!-- Testimonials Section Pro -->
+        <section class="testimonials-section">
+            <div style="text-align: center; margin-bottom: 6rem;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--success); color: white; padding: 6px 16px; border-radius: 99px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase;">Retours d'expérience</div>
+                <h2 style="font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 1.5rem; display: block;">Ils ont retrouvé <span class="text-gradient">le sourire.</span></h2>
+                <p class="text-muted" style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Chaque jour, notre communauté prouve que la solidarité peut faire des miracles.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"J'avais perdu mon alliance à la plage. Je n'y croyais plus, mais grâce au signalement de Marc sur cette appli, j'ai pu la récupérer le lendemain. Un service incroyable !"</p>
+                    <div class="testimonial-author">
+                        <div class="t-avatar" style="background: #fee2e2; color: #ef4444;">S</div>
+                        <div class="t-info">
+                            <h4>Sophie L.</h4>
+                            <span>Alliance retrouvée</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Retrouver mon chat après 3 jours d'angoisse a été le plus beau jour de ma vie. Merci à tous ceux qui gardent l'œil ouvert sur LostFound. Une vraie famille."</p>
+                    <div class="testimonial-author">
+                        <div class="t-avatar" style="background: #e0e7ff; color: var(--primary);">J</div>
+                        <div class="t-info">
+                            <h4>Jean-Pierre M.</h4>
+                            <span>Siamois retrouvé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Une interface simple, propre et efficace. J'ai trouvé un portefeuille et en 10 minutes, le propriétaire m'a contacté. C'est l'outil qui nous manquait en ville."</p>
+                    <div class="testimonial-author">
+                        <div class="t-avatar" style="background: #dcfce7; color: #10b981;">A</div>
+                        <div class="t-info">
+                            <h4>Amandine T.</h4>
+                            <span>Actrice solidaire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <?php endif; ?>
 </div>
 

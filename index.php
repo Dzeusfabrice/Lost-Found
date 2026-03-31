@@ -9,7 +9,7 @@
 require_once __DIR__ . '/backend/config/bootstrap.php';
 
 // Récupération de l'action depuis l'URL (ex: index.php?action=login)
-$action = $_GET['action'] ?? 'home';
+$action = $_GET['action'] ?? 'welcome';
 
 // Initialisation du routeur et dispatching
 $router = new Router();
