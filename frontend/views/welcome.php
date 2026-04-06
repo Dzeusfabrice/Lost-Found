@@ -25,7 +25,7 @@ $pageTitle = "Bienvenue chez Lost & Found";
         style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);">
 
         <div
-            style="text-align: center; color: white; padding: 4rem; max-width: 900px; animation: fadeInUp 1.2s ease-out;">
+            style="text-align: center; color: white; padding: 4rem; width: 90%; max-width: none; animation: fadeInUp 1.2s ease-out;">
 
             <div
                 style="display: inline-flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 8px 24px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.2);">
